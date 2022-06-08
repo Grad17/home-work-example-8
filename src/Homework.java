@@ -11,16 +11,18 @@ public class Homework {
         int stepDistance = 40;
         int numberDays = 1;
 
-        calculateLeapYear(currentYear);
+        leapYearOrNot(currentYear);
         checkSpecification(currentYear, clientOS1);
-        deliveryDistance(distance, limitation, stepDistance, numberDays);
+        int days = calculateDeliveryDays(distance, limitation, stepDistance, numberDays);
+        System.out.println("Потребуется дней " + days);
     }
-    public static void calculateLeapYear (int leapYear) {
+    private static void leapYearOrNot (int leapYear) {
 
         if (leapYear % 4 == 0 && leapYear % 100 != 0 || leapYear % 400 == 0) {
             System.out.println(leapYear + " год является високосным.");
-        } else
-            System.out.println(leapYear + " год является не високосным.");
+        } else {
+            System.out.println(leapYear + " год не является високосным.");
+        }
     }
     private static void checkSpecification(int currentYear, int clientOS1) {
 
@@ -35,14 +37,14 @@ public class Homework {
             System.out.println("Установите облегчнную версию для iOS по ссылке.");
         }
     }
-    private static void deliveryDistance(int distance, int limitation, int stepDistance, int numberDays) {
+    private static int calculateDeliveryDays(int distance, int limitation, int stepDistance, int numberDays) {
 
         if ( distance > limitation) {
             numberDays += ((distance-limitation)/stepDistance);
             if ((distance-limitation)%stepDistance > 0){
                 numberDays++;
-                System.out.println("Потребуется дней " + numberDays);
             }
         }
+        return numberDays;
     }
 }
